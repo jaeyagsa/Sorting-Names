@@ -7,8 +7,8 @@
   <title>Name Sort & Search</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f8f9fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -17,32 +17,43 @@
     }
     .container {
       background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      max-width: 500px;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      max-width: 600px;
       width: 100%;
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     h1 {
       text-align: center;
       margin-bottom: 20px;
+      color: #333;
     }
-    input, button, label {
-      display: block;
-      margin: 10px 0;
+    label {
+      font-weight: bold;
     }
     input[type="text"] {
-      padding: 8px;
+      padding: 10px;
       width: 100%;
+      border: 2px solid #ccc;
+      border-radius: 8px;
       box-sizing: border-box;
+      margin-top: 5px;
     }
     button {
-      padding: 10px;
+      padding: 12px;
       background: #007bff;
       color: white;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
+      transition: background 0.3s ease;
+      width: 100%;
+      margin-top: 10px;
     }
     button:hover {
       background: #0056b3;
@@ -50,14 +61,33 @@
     ul {
       list-style: none;
       padding: 0;
+      margin-top: 15px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      max-height: 200px;
+      overflow-y: auto;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.1);
     }
     li {
-      padding: 5px 0;
+      padding: 8px 12px;
       border-bottom: 1px solid #eee;
     }
+    li:last-child {
+      border-bottom: none;
+    }
     .result {
-      margin-top: 10px;
+      margin-top: 15px;
       font-weight: bold;
+      text-align: center;
+      font-size: 1.2em;
+    }
+    .checkbox {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+    }
+    .checkbox input {
+      margin-right: 8px;
     }
   </style>
 </head>
@@ -65,11 +95,11 @@
   <div class="container">
     <h1>Name Sort & Search</h1>
     <label for="names">Enter names (comma separated):</label>
-    <input id="names" type="text" placeholder="e.g. Berto, Karding, Cardo" />
+    <input id="names" type="text" value="Christine Mae Maranan, Al Aerol Bituin, John Arsival Ortiz, Johnlei Ativo, Jeah Loryne Buensuceso" />
     
-    <label>
-      <input type="checkbox" id="sortByLastName"> Sort by last name
-    </label>
+    <div class="checkbox">
+      <input type="checkbox" id="sortByLastName"> <label for="sortByLastName">Sort by last name</label>
+    </div>
 
     <button id="sortBtn">Sort Names</button>
     <ul id="sortedList"></ul>
@@ -107,10 +137,10 @@
     searchBtn.addEventListener('click', () => {
       const query = document.getElementById('search').value.trim();
       if (namesArray.includes(query)) {
-        result.textContent = "Name found!";
+        result.textContent = "Name found! ✅";
         result.style.color = "green";
       } else {
-        result.textContent = "Name not found.";
+        result.textContent = "Name not found. ❌";
         result.style.color = "red";
       }
     });
@@ -127,4 +157,3 @@
 </body>
 </html>
 ```
-
